@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #141414; /* Netflix-style deep dark background */
+            --nav-bg: #000000;
+            --text-primary: #ffffff;
+            --text-secondary: #aaaaaa;
+            --accent: #e50914;
+            --accent-2: #0982e5;
+            --transition-speed: 0.3s;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* --- Navigation --- */
+        .side-nav {
+            width: 80px;
+            background-color: var(--nav-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 2rem;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+            transition: width var(--transition-speed);
+        }
+        
+        .side-nav:hover {
+            width: 200px;
+        }
+        
+        .nav-item {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.5rem;
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding-left: 1.75rem;
+            transition: color 0.2s;
+        }
+        
+        .nav-item span {
+            font-size: 1rem;
+            margin-left: 1.5rem;
+            opacity: 0;
+            white-space: nowrap;
+            transition: opacity var(--transition-speed);
+        }
+        
+        .side-nav:hover .nav-item span {
+            opacity: 1;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            color: var(--text-primary);
+            border-left: 3px solid var(--accent);
+        }
+        
+        /* --- Main Content --- */
+        .content-area {
+            margin-left: 80px; /* Offset for the sidebar */
+            padding: 3rem 2rem;
+            width: calc(100% - 80px);
+        }
+        
+        .portfolio-view {
+            display: none; /* Hide all by default */
+            animation: fadeIn 0.4s ease-in;
+        }
+        
+        .portfolio-view.active-view {
+            display: block; /* Show active */
+        }
+        
+        .view-title {
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        
+        p {
+            max-width: 600px;
+        }
+        
+        a {
+            color: var(--accent-2);
+            font-weight: bold;
+            text-decoration: none;
+			transition: color 0.2s ease;
+        }
+        
+        a:hover {
+			color: var(--accent);
+			text-decoration: none;
+        }
+        
+        /* --- Scrolling Gallery --- */
+        
+        .gallery-section h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .horizontal-scroll {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 1rem; /* Space for scrollbar */
+            scroll-behavior: smooth;
+            /* Hide scrollbar for clean look, but keep functionality */
+            scrollbar-width: none; 
+        }
+        
+        .horizontal-scroll::-webkit-scrollbar {
+            display: none; 
+        }
+        
+        /* --- Media Cards & Hover Effects --- */
+        .media-card {
+            position: relative;
+            width: 100%; 
+            height: 170px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform var(--transition-speed);
+        }
+        
+        .scroll-item {
+            display: flex;
+            flex-direction: column;
+            min-width: 300px; /* The width constraint lives here now */
+            gap: 0.5rem;       /* Space between the card image and the text link */
+        }
+        
+        .scroll-item a {
+        	text-align: center;
+        }
+        
+        .card-text-link {
+			color: var(--accent-2);
+            font-size: 0.85rem;
+            text-decoration: none;
+            padding: 0 0.25rem;
+            transition: color 0.2s ease;
+        }
+        
+        .card-text-link:hover {
+            color: var(--accent);
+			text-decoration: none;
+        }
+        
+		.media-card:hover .card-overlay,
+		.media-card.show-overlay .card-overlay {
+			opacity: 1;
+		}
+		
+		.media-card:hover,
+		.media-card.show-overlay {
+			transform: scale(1.05);
+			z-index: 10;
+		}
+        
+        .media-card img {
+            width: 300px;
+            height: 170px;
+            object-fit: cover;
+        }
+        
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .card-desc {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-date {
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        /* --- Link Button --- */
+        .portfolio-btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .portfolio-btn:hover {
+            background-color: var(--accent);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* --- Mobile Optimization --- */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: row; /* Keeps nav and content side-by-side */
+            }
+            
+            .side-nav {
+                width: 60px; /* Slimmer profile for small screens */
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+                padding-top: 1rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                overflow-y: auto;
+            }
+            
+            .side-nav:hover {
+                width: 60px; /* Disables the hover expansion feature on mobile touch devices */
+            }
+            
+            .nav-item {
+                margin: 1rem 0;
+                padding-left: 0;
+                justify-content: center; /* Centers the icon perfectly in the slim bar */
+                border-left: none;
+            }
+            
+            .nav-item i {
+                font-size: 1.2rem; /* Slightly smaller icons for mobile screens */
+            }
+            
+            .nav-item span {
+                display: none; /* Explicitly hides text labels on mobile */
+            }
+            
+            .nav-item:hover, .nav-item.active {
+                border-left: none;
+                color: var(--accent); /* Uses purely color change to show active state */
+            }
+            
+            /* --- Main Content Adjustments --- */
+            .content-area {
+                margin-left: 60px; /* Matches the new slim sidebar width */
+                margin-bottom: 0;   /* Clears out the old bottom space layout */
+                width: calc(100% - 60px);
+                padding: 2rem 1rem;
+            }
+            
+            .scroll-item {
+                min-width: 240px; /* Scales down the project cards so more fits on mobile views */
+            }
+            
+            .media-card {
+                height: 135px; /* Keeps the aspect ratio looking good on smaller widths */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="side-nav">
+        <a href="#" class="nav-item active" data-target="woodburning"><i class="fa-solid fa-fire"></i><span>Woodburning</span></a>
+        <a href="#" class="nav-item" data-target="published"><i class="fa-solid fa-book"></i><span>Published</span></a>
+        <a href="#" class="nav-item" data-target="fun-writing"><i class="fa-solid fa-pen-nib"></i><span>Fun Writing</span></a>
+        <a href="#" class="nav-item" data-target="curriculum"><i class="fa-solid fa-graduation-cap"></i><span>Curriculum</span></a>
+        <a href="#" class="nav-item" data-target="puzzles"><i class="fa-solid fa-puzzle-piece"></i><span>Puzzles</span></a>
+        <a href="#" class="nav-item" data-target="digital-art"><i class="fa-solid fa-palette"></i><span>Digital Art</span></a>
+        <a href="#" class="nav-item" data-target="drawing"><i class="fa-solid fa-pencil"></i><span>Drawing</span></a>
+        <a href="#" class="nav-item" data-target="painting"><i class="fa-solid fa-paint-brush"></i><span>Painting</span></a>
+        <a href="#" class="nav-item" data-target="coding"><i class="fa-solid fa-code"></i><span>Coding</span></a>
+    </nav>
+
+    <main class="content-area">
+        
+        <!-- Woodburning Portfolio View -->
+        <div id="woodburning" class="portfolio-view active-view">
+            <h1 class="view-title"><i class="fa-solid fa-fire"></i>&nbsp;Woodburning</h1>
+            <p style="max-width: 600px; margin-bottom: 40px;">Since I discovered it in 2015, woodburning has become my passion. I've spent thousands of hours focused on the precision and painstaking detail that the artistic medium requires. That passion has grown into woodworking projects of several varieties. Any of the projects show below can be seen in more detail on my woodworking portfolio, <a href="https://untillions18.wordpress.com/" target="_blank">Until Lions Woodworking</a>.</p>
+
+            <section class="gallery-section">
+                <h2>Woodburning</h2>
+                <div class="horizontal-scroll">
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-burning-1.png" alt="Woodburning 1">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Hello</h3>
+                                <p class="card-desc">2' x 2' pine housewarming gift for a friend.</p>
+                                <span class="card-date">September 2024</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-burning-2.png" alt="Woodburning 2">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Mighty Jackalope Tattoos</h3>
+                                <p class="card-desc">12" x 15" basswood custom made for client.</p>
+                                <span class="card-date">June 2019</span>
+                            </div>
+                        </div>
+                    </div>
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-burning-3.png" alt="Woodburning 3">
+                            <div class="card-overlay">
+                                <h3 class="card-title">United States of America</h3>
+                                <p class="card-desc">30" x 12" basswood added to my collection.</p>
+                                <span class="card-date">August 2020</span>
+                            </div>
+                        </div>
+                    </div>
+              
+                </div>
+            </section>
+          
+            <section class="gallery-section">
+                <h2>Cartopyrography</h2>
+                <div class="horizontal-scroll">
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-cartography-1.png" alt="Cartography 1">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Elden Ring Map</h3>
+                                <p class="card-desc">3' x 3' pine still in progress.</p>
+                                <span class="card-date">TBD</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-cartography-2.png" alt="Cartography 2">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Zelda Map of the Wild</h3>
+                                <p class="card-desc">2' x 2' pine still in progress.</p>
+                                <span class="card-date">TBD</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-cartography-3.png" alt="Cartography 3">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Wyoming</h3>
+                                <p class="card-desc">2' x 2' pine custom made for a client.</p>
+                                <span class="card-date">July 2018</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-cartography-4.png" alt="Cartography 4">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Texas</h3>
+                                <p class="card-desc">2' x 2' pine donated to a fundraiser.</p>
+                                <span class="card-date">April 2018</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-cartography-5.png" alt="Cartography 5">
+                            <div class="card-overlay">
+                                <h3 class="card-title">World Map</h3>
+                                <p class="card-desc">4' x 3' pine added to my collection.</p>
+                                <span class="card-date">January 2018</span>
+                            </div>
+                        </div>
+                    </div>
+              
+                </div>
+            </section>
+          
+            <section class="gallery-section">
+                <h2>DIY Projects</h2>
+                <div class="horizontal-scroll">
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-diy-1.png" alt="DIY 1">
+                            <div class="card-overlay">
+                                <h3 class="card-title">DIY Home Office</h3>
+                                <p class="card-desc">13' x 8' built-in for my office.</p>
+                                <span class="card-date">April 2024</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-diy-2.png" alt="DIY 2">
+                            <div class="card-overlay">
+                                <h3 class="card-title">DIY Fireplace</h3>
+                                <p class="card-desc">5' x 10' built-in for my living room.</p>
+                                <span class="card-date">April 2023</span>
+                            </div>
+                        </div>
+                    </div>
+              
+                </div>
+            </section>
+          
+            <section class="gallery-section">
+                <h2>Other Woodworking</h2>
+                <div class="horizontal-scroll">
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-other-1.png" alt="Other 1">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Modular Mini-Golf</h3>
+                                <p class="card-desc">Custom made for a party and then sold.</p>
+                                <span class="card-date">October 2023</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-other-2.png" alt="Other 2">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Monogrammed Cutting Board</h3>
+                                <p class="card-desc">18" x 12" cherry & maple custom made for a friend.</p>
+                                <span class="card-date">April 2022</span>
+                            </div>
+                        </div>
+                    </div>
+              
+                </div>
+            </section>
+          
+        </div>
+          
+        <!-- Puzzles Portfolio View -->
+        <div id="puzzles" class="portfolio-view">
+            <h1 class="view-title"><i class="fa-solid fa-puzzle-piece"></i>&nbsp;Puzzles</h1>
+            <p style="margin-bottom: 40px;">I volunteered for from 2024-2026 as a senior editor for <a href="https://puzzledpint.org" target="_blank">Puzzled Pint</a>. In that time, I helped design, illustrate, and edit puzzle sets submitted by authors from around the world. I also published two of my own puzzle sets and created some great interactive puzzle elements all linked below.</p>
+
+            <section class="gallery-section">
+                <h2>Puzzle Sets</h2>
+                <div class="horizontal-scroll">
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/puzzles-set-2.png" alt="Phantom Tollbooth">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Settlers of Catan</h3>
+                                <p class="card-desc">Set of 7 puzzles plus a meta puzzle themed for this popular board game's 30th anniversary</p>
+                                <span class="card-date">November 2025</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/puzzles-set-1.png" alt="Phantom Tollbooth">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Phantom Tollbooth</h3>
+                                <p class="card-desc">Set of 6 puzzles plus a meta puzzle themed for this beloved children's book</p>
+                                <span class="card-date">August 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <h2>Interactive Elements</h2>
+                <div class="horizontal-scroll">
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/puzzles-element-3.png" alt="Code Converter">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Code Converter</h3>
+                                <p class="card-desc">HTML page for converting between common puzzle codes like pigpen, semaphore, braille, and more</p>
+                                <span class="card-date">July 2025</span>
+                            </div>
+                        </div>
+                        <a href="https://puzzledpint.org/wp-content/uploads/2025/06/InteractiveCodeSheet.html" class="card-text-link" target="_blank">Link to the Applet</a>
+                    </div>
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/puzzles-element-2.png" alt="Hex Grid">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Hex Grid</h3>
+                                <p class="card-desc">HTML interactive serving as a digital alternative for a paper-and-pencil puzzle</p>
+                                <span class="card-date">January 2026</span>
+                            </div>
+                        </div>
+						<a href="https://puzzledpint.org/wp-content/uploads/2025/11/GratefulDeadInteractive.html" class="card-text-link" target="_blank">Link to my Applet</a>
+						<a href="https://puzzledpint.org/wp-content/uploads/2025/12/GratefulDead_MainSet3.pdf" class="card-text-link" target="_blank">Link to the Puzzle</a>
+                    </div>
+
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/puzzles-element-1.png" alt="Sliding Tiles">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Sliding Tiles</h3>
+                                <p class="card-desc">HTML interactive serving as a digital alternative for a cut-out-and-rearrange puzzle</p>
+                                <span class="card-date">July 2025</span>
+                            </div>
+                        </div>
+						<a href="https://puzzledpint.org/wp-content/uploads/2025/01/slidingTiles.html" class="card-text-link" target="_blank">Link to my Applet</a>
+						<a href="https://puzzledpint.org/wp-content/uploads/2025/01/15Anniversary_MainSet1.pdf" class="card-text-link" target="_blank">Link to the Puzzle</a>
+                    </div>
+
+                </div>
+                
+                <h2>Other Puzzles</h2>
+                <div class="horizontal-scroll">
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/puzzles-other-1.png" alt="T-Shirt">
+                            <div class="card-overlay">
+                                <h3 class="card-title">15th Anniversary Shirt</h3>
+                                <p class="card-desc">Puzzled Pint's 15th anniversary T-shirt which is, in itself, a puzzle</p>
+                                <span class="card-date">July 2025</span>
+                            </div>
+                        </div>
+						<a href="https://puzzledpint.org/crystal" class="card-text-link" target="_blank">Link to the Puzzle</a>                        
+                    </div>
+
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/puzzles-other-2.png" alt="T-Shirt Meta">
+                            <div class="card-overlay">
+                                <h3 class="card-title">T-Shirt Meta Puzzle</h3>
+                                <p class="card-desc">This T-shirt meta puzzle takes true fans deeper into the archive of old sets</p>
+                                <span class="card-date">July 2025</span>
+                            </div>
+                        </div>
+						<a href="https://puzzledpint.org/wp-content/uploads/2025/04/15AnniversaryMeta.pdf" class="card-text-link" target="_blank">Link to the Puzzle</a>                        
+                    </div>
+              
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+		const navItems = document.querySelectorAll('.nav-item');
+		const views = document.querySelectorAll('.portfolio-view');
+		const mediaCards = document.querySelectorAll('.media-card');
+		
+		// 1. Portfolio Tab Switching Logic
+		navItems.forEach(item => {
+			item.addEventListener('click', (e) => {
+				e.preventDefault();
+			
+				navItems.forEach(nav => nav.classList.remove('active'));
+				views.forEach(view => view.classList.remove('active-view'));
+				
+				item.classList.add('active');
+				
+				const targetId = item.getAttribute('data-target');
+				const targetView = document.getElementById(targetId);
+				if (targetView) {
+					targetView.classList.add('active-view');
+				}
+				
+				// Clean up any open mobile overlays when switching tabs
+				mediaCards.forEach(c => c.classList.remove('show-overlay'));
+			});
+		});
+	
+		// 2. Mobile Tap-to-Reveal Overlay Logic
+		mediaCards.forEach(card => {
+			card.addEventListener('click', (e) => {
+				// Only execute this logic on mobile screens
+				if (window.innerWidth <= 768) {
+					e.stopPropagation(); // Prevents the document click listener from firing instantly
+					
+					const isOpen = card.classList.contains('show-overlay');
+					
+					// Close any other open card overlays first
+					mediaCards.forEach(c => c.classList.remove('show-overlay'));
+					
+					// If the clicked card wasn't already open, open it
+					if (!isOpen) {
+						card.classList.add('show-overlay');
+					}
+				}
+			});
+		});
+	
+		// 3. Dismiss Overlay When Tapping Anywhere Else
+		document.addEventListener('click', () => {
+			if (window.innerWidth <= 768) {
+				mediaCards.forEach(c => c.classList.remove('show-overlay'));
+			}
+		});
+	});
+	
+    </script>
+</body>
+</html>
