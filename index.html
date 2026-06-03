@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creator Portfolio</title>
+    
     <link rel="apple-touch-icon" href="images/untillions.png">
 	<link rel="icon" type="image/png" href="images/untillions.png">
     <link rel="stylesheet" href="style.css">
@@ -41,7 +43,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 2rem;
+            padding-top: 32px;
             position: fixed;
             height: 100vh;
             z-index: 100;
@@ -55,18 +57,18 @@
         .nav-item {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 1.5rem;
-            margin: 1.5rem 0;
+            font-size: 24px;
+            margin: 24px 0;
             display: flex;
             align-items: center;
             width: 100%;
-            padding-left: 1.75rem;
+            padding-left: 28px;
             transition: color 0.2s;
         }
         
         .nav-item span {
-            font-size: 1rem;
-            margin-left: 1.5rem;
+            font-size: 16px;
+            margin-left: 24px;
             opacity: 0;
             white-space: nowrap;
             transition: opacity var(--transition-speed);
@@ -83,27 +85,32 @@
         
         /* --- Main Content --- */
         .content-area {
-            margin-left: 80px; /* Offset for the sidebar */
-            padding: 3rem 2rem;
+            margin-left: 80px;
+            padding: 48px 32px;
             width: calc(100% - 80px);
         }
         
         .portfolio-view {
-            display: none; /* Hide all by default */
+            display: none;
             animation: fadeIn 0.4s ease-in;
         }
         
         .portfolio-view.active-view {
-            display: block; /* Show active */
+            display: block;
         }
         
         .view-title {
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
+            margin-bottom: 32px;
+            font-size: 32px;
+        }
+        
+        h2 {
+        	color: var(--accent);
         }
         
         p {
             max-width: 600px;
+            margin-bottom: 40px;
         }
         
         a {
@@ -119,20 +126,18 @@
         }
         
         /* --- Scrolling Gallery --- */
-        
         .gallery-section h2 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
+            font-size: 20px;
+            margin-bottom: 16px;
             color: var(--text-secondary);
         }
         
         .horizontal-scroll {
             display: flex;
-            gap: 1rem;
+            gap: 16px;
             overflow-x: auto;
-            padding-bottom: 1rem; /* Space for scrollbar */
+            padding-bottom: 12px;
             scroll-behavior: smooth;
-            /* Hide scrollbar for clean look, but keep functionality */
             scrollbar-width: none; 
         }
         
@@ -311,8 +316,8 @@
 
     <nav class="side-nav">
         <a href="#" class="nav-item active" data-target="woodburning"><i class="fa-solid fa-fire"></i><span>Woodburning</span></a>
-        <a href="#" class="nav-item" data-target="published"><i class="fa-solid fa-book"></i><span>Published</span></a>
-        <a href="#" class="nav-item" data-target="fun-writing"><i class="fa-solid fa-pen-nib"></i><span>Fun Writing</span></a>
+        <a href="#" class="nav-item" data-target="writing"><i class="fa-solid fa-book"></i><span>Writing</span></a>
+        <a href="#" class="nav-item" data-target="speaking"><i class="fa-solid fa-microphone"></i><span>Speaking</span></a>
         <a href="#" class="nav-item" data-target="curriculum"><i class="fa-solid fa-graduation-cap"></i><span>Curriculum</span></a>
         <a href="#" class="nav-item" data-target="puzzles"><i class="fa-solid fa-puzzle-piece"></i><span>Puzzles</span></a>
         <a href="#" class="nav-item" data-target="digital-art"><i class="fa-solid fa-palette"></i><span>Digital Art</span></a>
@@ -323,10 +328,10 @@
 
     <main class="content-area">
         
-        <!-- Woodburning Portfolio View -->
+        <!-- Woodburning Portfolio -->
         <div id="woodburning" class="portfolio-view active-view">
             <h1 class="view-title"><i class="fa-solid fa-fire"></i>&nbsp;Woodburning</h1>
-            <p style="max-width: 600px; margin-bottom: 40px;">Since I discovered it in 2015, woodburning has become my passion. I've spent thousands of hours focused on the precision and painstaking detail that the artistic medium requires. That passion has grown into woodworking projects of several varieties. Any of the projects show below can be seen in more detail on my woodworking portfolio, <a href="https://untillions18.wordpress.com/" target="_blank">Until Lions Woodworking</a>.</p>
+            <p>Since I discovered it in 2015, woodburning has become my passion. I've spent thousands of hours focused on the precision and painstaking detail that the artistic medium requires. That passion has grown into woodworking projects of several varieties. Any of the projects show below can be seen in more detail on my woodworking portfolio, <a href="https://untillions18.wordpress.com/" target="_blank">Until Lions Woodworking</a>.</p>
 
             <section class="gallery-section">
                 <h2>Woodburning</h2>
@@ -489,11 +494,226 @@
             </section>
           
         </div>
+        
+        <!-- Writing Portfolio -->
+        <div id="writing" class="portfolio-view">
+            <h1 class="view-title"><i class="fa-solid fa-book"></i>&nbsp;&nbsp;Writing</h1>
+            <p>I've been writing in a personal and professional capacity for years. I enjoy writing about education, mathematics, psychology, and even writing fiction from time to time.</p>
+
+            <section class="gallery-section">
+                <h2>Educational Blogs</h2>
+                <div class="horizontal-scroll">
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/writing-educational-1.png" alt="Blog 1">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Teach.Learn.Grow Blog</h3>
+                                <p class="card-desc">Series of blog posts about math instruction, assessment, and theory</p>
+                                <span class="card-date">April 2026</span>
+                            </div>
+                        </div>
+						<a href="https://www.nwea.org/blog/author/akugler/" class="card-text-link" target="_blank">Read the Blog Series</a>
+                    </div>
+
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/writing-educational-2.png" alt="Blog 2">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Nat Geo Educator Blog</h3>
+                                <p class="card-desc">Blog post about maps, culture, and empowering students to create</p>
+                                <span class="card-date">February 2021</span>
+                            </div>
+                        </div>
+                        <a href="https://natgeoeducationblog.wordpress.com/2021/02/25/how-my-fifth-graders-found-empowerment-through-mapmaking/" class="card-text-link" target="_blank">Read the Blog Post</a>
+                    </div>
+              
+                </div>
+            </section>
           
-        <!-- Puzzles Portfolio View -->
+            <section class="gallery-section">
+                <h2>Fun Writing</h2>
+                <div class="horizontal-scroll">
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/writing-fun-1.png" alt="Searching for Lions">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Searching for Lions</h3>
+                                <p class="card-desc">Blog Series of my own for fiction writing and story starters</p>
+                                <span class="card-date">TBD</span>
+                            </div>
+                        </div>
+                        <a href="https://searchingforlions.wordpress.com" class="card-text-link" target="_blank">Read the Blog Series</a>
+                    </div>
+                    
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/writing-fun-2.png" alt="Patient 001">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Patient 001</h3>
+                                <p class="card-desc">Fiction novel (still in progress) about a woman who discovers who she is through dreams</p>
+                                <span class="card-date">TBD</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+					<div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/writing-fun-3.png" alt="Medium-Sized Stories">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Medium-Sized Stories</h3>
+                                <p class="card-desc">A "Wayside Stories" parody written about my third grade class in 2020</p>
+                                <span class="card-date">May 2020</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/writing-fun-4.png" alt="Nonodex">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Nonodex</h3>
+                                <p class="card-desc">Nonogram puzzles for popular pokemon characters</p>
+                                <span class="card-date">July 2018</span>
+                            </div>
+                        </div>
+                    </div>
+              
+                </div>
+            </section>
+          
+            <section class="gallery-section">
+                <h2>Other Publications</h2>
+                <div class="horizontal-scroll">
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/writing-other-1.png" alt="Book">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Art Challenges Book</h3>
+                                <p class="card-desc">Book with 30 drawing challenges involving spatial reasoning</p>
+                                <span class="card-date">June 2020</span>
+                            </div>
+                        </div>
+                        <a href="https://a.co/d/05krXQ1W" class="card-text-link" target="_blank">Link to the Book</a>
+                    </div>
+              
+                </div>
+            </section>
+          
+        </div>
+        
+        <!-- Speaking Portfolio -->
+        <div id="speaking" class="portfolio-view">
+            <h1 class="view-title"><i class="fa-solid fa-microphone"></i>&nbsp;&nbsp;Speaking</h1>
+            <p>I've had the opportunity to speak at several education conferences. Additionally, I've filmed several interviews and videos about educational theory and classroom best practice.</p>
+
+            <section class="gallery-section">
+                <h2>Conference Presentations</h2>
+                <div class="horizontal-scroll">
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/speaking-conference-1.png" alt="Presentation 1">
+                            <div class="card-overlay">
+                                <h3 class="card-title">NWEA Fusion 2026</h3>
+                                <p class="card-desc">Presentation on mathematics Big Ideas and Conceptual Thresholds</p>
+                                <span class="card-date">June 2026</span>
+                            </div>
+                        </div>
+						<a href="https://www.nwea.org/events-intro/nwea-fusion-agenda-2026/#h-2026-breakout-sessions" class="card-text-link" target="_blank">See the Session Overview</a>
+                    </div>
+
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/speaking-conference-2.png" alt="Presentation 2">
+                            <div class="card-overlay">
+                                <h3 class="card-title">NWEA Fusion 2025</h3>
+                                <p class="card-desc">Co-presentation on best practice instruction for informational text</p>
+                                <span class="card-date">June 2025</span>
+                            </div>
+                        </div>
+						<a href="https://stage1.cms-dev.nwea.org/events-intro/nwea-fusion-agenda-2025/#h-breakout-session-highlights" class="card-text-link" target="_blank">See the Session Overview</a>
+                    </div>
+                    
+					<div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/speaking-conference-3.png" alt="Presentation 3">
+                            <div class="card-overlay">
+                                <h3 class="card-title">UW Literacy Conference 2014</h3>
+                                <p class="card-desc">Presentation on the importance of vocabulary instruction in math class</p>
+                                <span class="card-date">September 2014</span>
+                            </div>
+                        </div>
+                    </div>
+              
+                </div>
+            </section>
+          
+            <section class="gallery-section">
+                <h2>Video Appearances</h2>
+                <div class="horizontal-scroll">
+              
+              		<div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/coming-soon.png" alt="Video 1">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Conceptual Thresholds Session</h3>
+                                <p class="card-desc">Video of the 2026 session on Conceptual Thresholds in mathematics education</p>
+                                <span class="card-date">September 2026</span>
+                            </div>
+                        </div>
+                        <a href="#" class="card-text-link" target="_blank">See the Session</a>
+                    </div>
+                    
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/coming-soon.png" alt="Video 2">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Current Polarizing Math Debates</h3>
+                                <p class="card-desc">Video discussion about traditionalist vs. reformist math education perspectives</p>
+                                <span class="card-date">August 2026</span>
+                            </div>
+                        </div>
+						<a href="#" class="card-text-link" target="_blank">See the Video</a>
+                    </div>
+                    
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/speaking-video-3.png" alt="Video 3">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Math Language Video</h3>
+                                <p class="card-desc">Video interview about the power of language in math class</p>
+                                <span class="card-date">September 2025</span>
+                            </div>
+                        </div>
+                        <a href="https://www.youtube.com/watch?v=Jeh-1zI26xE" class="card-text-link" target="_blank">See the Interview</a>
+                    </div>
+                    
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/speaking-video-4.png" alt="Video 4">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Why Do Humans Move?</h3>
+                                <p class="card-desc">Final submission for National Geographic Educator Certification</p>
+                                <span class="card-date">March 2019</span>
+                            </div>
+                        </div>
+						<a href="https://natgeo.novoed.com/#!/courses/educator-certification-winter-2019/reports/981931" class="card-text-link" target="_blank">See the Submission</a>
+						<a href="https://tinyurl.com/NatGeoCapstone2019" class="card-text-link" target="_blank">Download the Video</a>
+						<!--Actual address: https://d2d6mu5qcvgbk5.cloudfront.net/transcript/video/3443941/low/949b0319db4b50fd44e7db02c68c0b692a72f2ae494686-low_Nat%20Geo%20Capstone.mp4?response-content-disposition=attachment%3B%20filename%3D%22Nat_Geo_Capstone.mp4%22%3B%20filename%2A%3DUTF-8%27%27Nat_Geo_Capstone.mp4&X-Amz-Expires=90000&X-Amz-Date=20260603T201043Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAX2L5PPJETNKTLV7P%2F20260603%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=e93e4fe956e4a37cfae0c5851808f979f73c71aa095866d0aa54c4c4a7edc444-->
+                    </div>
+              
+                </div>
+            </section>
+          
+        </div>
+        
+        <!-- Puzzles Portfolio -->
         <div id="puzzles" class="portfolio-view">
             <h1 class="view-title"><i class="fa-solid fa-puzzle-piece"></i>&nbsp;Puzzles</h1>
-            <p style="margin-bottom: 40px;">I volunteered for from 2024-2026 as a senior editor for <a href="https://puzzledpint.org" target="_blank">Puzzled Pint</a>. In that time, I helped design, illustrate, and edit puzzle sets submitted by authors from around the world. I also published two of my own puzzle sets and created some great interactive puzzle elements all linked below.</p>
+            <p>I volunteered for from 2024-2026 as a senior editor for <a href="https://puzzledpint.org" target="_blank">Puzzled Pint</a>. In that time, I helped design, illustrate, and edit puzzle sets submitted by authors from around the world. I also published two of my own puzzle sets and created some great interactive puzzle elements all linked below.</p>
 
             <section class="gallery-section">
                 <h2>Puzzle Sets</h2>
@@ -501,24 +721,26 @@
               
                     <div class="scroll-item">
                         <div class="media-card">
-                            <img src="images/puzzles-set-2.png" alt="Phantom Tollbooth">
+                            <img src="images/puzzles-set-1.png" alt="Catan">
                             <div class="card-overlay">
                                 <h3 class="card-title">Settlers of Catan</h3>
                                 <p class="card-desc">Set of 7 puzzles plus a meta puzzle themed for this popular board game's 30th anniversary</p>
                                 <span class="card-date">November 2025</span>
                             </div>
                         </div>
+                        <a href="https://puzzledpint.org/events/november-2025/" class="card-text-link" target="_blank">Link to the Set</a>
                     </div>
 
                     <div class="scroll-item">
                         <div class="media-card">
-                            <img src="images/puzzles-set-1.png" alt="Phantom Tollbooth">
+                            <img src="images/puzzles-set-2.png" alt="Phantom Tollbooth">
                             <div class="card-overlay">
                                 <h3 class="card-title">Phantom Tollbooth</h3>
                                 <p class="card-desc">Set of 6 puzzles plus a meta puzzle themed for this beloved children's book</p>
                                 <span class="card-date">August 2024</span>
                             </div>
                         </div>
+						<a href="https://puzzledpint.org/events/august-2024/" class="card-text-link" target="_blank">Link to the Set</a>
                     </div>
                     
                 </div>
@@ -531,7 +753,7 @@
                             <img src="images/puzzles-element-3.png" alt="Code Converter">
                             <div class="card-overlay">
                                 <h3 class="card-title">Code Converter</h3>
-                                <p class="card-desc">HTML page for converting between common puzzle codes like pigpen, semaphore, braille, and more</p>
+                                <p class="card-desc">HTML page for converting between common puzzle codes</p>
                                 <span class="card-date">July 2025</span>
                             </div>
                         </div>
@@ -578,7 +800,7 @@
                                 <span class="card-date">July 2025</span>
                             </div>
                         </div>
-						<a href="https://puzzledpint.org/crystal" class="card-text-link" target="_blank">Link to the Puzzle</a>                        
+						<a href="https://www.bonfire.com/puzzled-pint-15th-anniversary-shirt/" class="card-text-link" target="_blank">Link to the Shirt</a>                        
                     </div>
 
                     <div class="scroll-item">
