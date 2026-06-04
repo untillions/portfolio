@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +12,7 @@
    
     <style>
         :root {
-            --bg-color: #141414; /* Netflix-style deep dark background */
+            --bg-color: #141414;
             --nav-bg: #000000;
             --text-primary: #ffffff;
             --text-secondary: #aaaaaa;
@@ -33,7 +32,7 @@
             color: var(--text-primary);
             font-family: 'Helvetica Neue', Arial, sans-serif;
             display: flex;
-            min-height: 100vh;
+            min-height: 100%;
         }
         
         /* --- Navigation --- */
@@ -45,7 +44,7 @@
             align-items: center;
             padding-top: 32px;
             position: fixed;
-            height: 100vh;
+            height: 100%;
             z-index: 100;
             transition: width var(--transition-speed);
         }
@@ -156,11 +155,30 @@
             transition: transform var(--transition-speed);
         }
         
+        .media-card:hover .card-overlay,
+		.media-card.show-overlay .card-overlay {
+			opacity: 1;
+		}
+		
+		.media-card:hover,
+		.media-card.show-overlay {
+			transform: scale(1.05);
+			z-index: 10;
+		}
+        
+        .media-card img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+        
         .scroll-item {
             display: flex;
             flex-direction: column;
-            min-width: 300px; /* The width constraint lives here now */
-            gap: 0.5rem;       /* Space between the card image and the text link */
+            width: 300px;
+			flex-shrink: 0;
+            gap: 8px;
         }
         
         .scroll-item a {
@@ -179,24 +197,7 @@
             color: var(--accent);
 			text-decoration: none;
         }
-        
-		.media-card:hover .card-overlay,
-		.media-card.show-overlay .card-overlay {
-			opacity: 1;
-		}
 		
-		.media-card:hover,
-		.media-card.show-overlay {
-			transform: scale(1.05);
-			z-index: 10;
-		}
-        
-        .media-card img {
-            width: 300px;
-            height: 170px;
-            object-fit: cover;
-        }
-        
         .card-overlay {
             position: absolute;
             top: 0;
@@ -221,7 +222,7 @@
             font-size: 0.85rem;
             font-style: italic;
             color: var(--text-secondary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 4px;
         }
         
         .card-date {
@@ -303,11 +304,11 @@
             }
             
             .scroll-item {
-                min-width: 240px; /* Scales down the project cards so more fits on mobile views */
+                width: 240px;
             }
             
             .media-card {
-                height: 135px; /* Keeps the aspect ratio looking good on smaller widths */
+                height: 136px;
             }
         }
     </style>
@@ -315,7 +316,8 @@
 <body>
 
     <nav class="side-nav">
-        <a href="#" class="nav-item active" data-target="woodburning"><i class="fa-solid fa-fire"></i><span>Woodburning</span></a>
+        <a href="#" class="nav-item active" data-target="home"><i class="fa-solid fa-home"></i><span>Home</span></a>
+		<a href="#" class="nav-item" data-target="woodburning"><i class="fa-solid fa-fire"></i><span>Woodburning</span></a>
         <a href="#" class="nav-item" data-target="writing"><i class="fa-solid fa-book"></i><span>Writing</span></a>
         <a href="#" class="nav-item" data-target="speaking"><i class="fa-solid fa-microphone"></i><span>Speaking</span></a>
         <a href="#" class="nav-item" data-target="curriculum"><i class="fa-solid fa-graduation-cap"></i><span>Curriculum</span></a>
@@ -328,8 +330,20 @@
 
     <main class="content-area">
         
+        <!-- Home Page -->
+        <div id="home" class="portfolio-view active-view">
+            <h1 class="view-title"><i class="fa-solid fa-id-badge"></i>&nbsp;Aaron Kugler</h1>
+            <p>Welcome to my portfolio!<br><br>
+            Click any of the icons on the left bar to view the various sections of my completed works or connect with me using any of the icons below.<br><br>
+			<a href="https://www.linkedin.com/in/aaronkugler/" class="card-text-link" target="_blank"><img src="images/linkedin.png" alt="Linked In" style="width: 36px;"></a>
+			<a href="https://untillions18.wordpress.com" class="card-text-link" target="_blank"><img src="images/untillions2.png" alt="Until Lions" style="width: 36px;"></a>
+			<a href="mailto:kugs@live.com" class="card-text-link" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+            </p>
+          
+        </div>
+        
         <!-- Woodburning Portfolio -->
-        <div id="woodburning" class="portfolio-view active-view">
+        <div id="woodburning" class="portfolio-view">
             <h1 class="view-title"><i class="fa-solid fa-fire"></i>&nbsp;Woodburning</h1>
             <p>Since I discovered it in 2015, woodburning has become my passion. I've spent thousands of hours focused on the precision and painstaking detail that the artistic medium requires. That passion has grown into woodworking projects of several varieties. Any of the projects show below can be seen in more detail on my woodworking portfolio, <a href="https://untillions18.wordpress.com/" target="_blank">Until Lions Woodworking</a>.</p>
 
@@ -342,7 +356,7 @@
                             <img src="images/woodworking-burning-1.png" alt="Woodburning 1">
                             <div class="card-overlay">
                                 <h3 class="card-title">Hello</h3>
-                                <p class="card-desc">2' x 2' pine housewarming gift for a friend.</p>
+                                <p class="card-desc">2ft x 2ft piece with 3D word and great negative space to contrast the flowers</p>
                                 <span class="card-date">September 2024</span>
                             </div>
                         </div>
@@ -353,7 +367,7 @@
                             <img src="images/woodworking-burning-2.png" alt="Woodburning 2">
                             <div class="card-overlay">
                                 <h3 class="card-title">Mighty Jackalope Tattoos</h3>
-                                <p class="card-desc">12" x 15" basswood custom made for client.</p>
+                                <p class="card-desc">12in x 15in piece with a tattoo shop logo, custom shading, and negative space</p>
                                 <span class="card-date">June 2019</span>
                             </div>
                         </div>
@@ -363,8 +377,8 @@
                         <div class="media-card">
                             <img src="images/woodworking-burning-3.png" alt="Woodburning 3">
                             <div class="card-overlay">
-                                <h3 class="card-title">United States of America</h3>
-                                <p class="card-desc">30" x 12" basswood added to my collection.</p>
+                                <h3 class="card-title">United States</h3>
+                                <p class="card-desc">30in x 12in piece with names creatively fit into the state shapes of the nation</p>
                                 <span class="card-date">August 2020</span>
                             </div>
                         </div>
@@ -373,6 +387,57 @@
                 </div>
             </section>
           
+          	<section class="gallery-section">
+                <h2>Word Art</h2>
+                <div class="horizontal-scroll">
+              
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-wordart-1.png" alt="Word Art 1">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Measure of a Hero</h3>
+                                <p class="card-desc">Icons of the Avengers arranged around a quote from Thor's mother</p>
+                                <span class="card-date">March 2021</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-wordart-2.png" alt="Word Art 2">
+                            <div class="card-overlay">
+                                <h3 class="card-title">The Tide Will Turn</h3>
+                                <p class="card-desc">Word arrangement of a motivating quote by H.B. Stowe</p>
+                                <span class="card-date">October 2018</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-wordart-3.png" alt="Word Art 3">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Words</h3>
+                                <p class="card-desc">Word arrangement of the best Dumbledore quote from Harry Potter</p>
+                                <span class="card-date">June 2018</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/woodworking-wordart-4.png" alt="Word Art 4">
+                            <div class="card-overlay">
+                                <h3 class="card-title">A Million Dreams</h3>
+                                <p class="card-desc">Word arrangement of memorable song lyrics from The Greatest Showman</p>
+                                <span class="card-date">January 2018</span>
+                            </div>
+                        </div>
+                    </div>
+              
+                </div>
+            </section>
+          	
             <section class="gallery-section">
                 <h2>Cartopyrography</h2>
                 <div class="horizontal-scroll">
@@ -382,7 +447,7 @@
                             <img src="images/woodworking-cartography-1.png" alt="Cartography 1">
                             <div class="card-overlay">
                                 <h3 class="card-title">Elden Ring Map</h3>
-                                <p class="card-desc">3' x 3' pine still in progress.</p>
+                                <p class="card-desc">3ft x 3ft epic overworld map of the video game, Elden Ring</p>
                                 <span class="card-date">TBD</span>
                             </div>
                         </div>
@@ -393,7 +458,7 @@
                             <img src="images/woodworking-cartography-2.png" alt="Cartography 2">
                             <div class="card-overlay">
                                 <h3 class="card-title">Zelda Map of the Wild</h3>
-                                <p class="card-desc">2' x 2' pine still in progress.</p>
+                                <p class="card-desc">2ft x 2ft overworld map of the video game, Breath of the Wild</p>
                                 <span class="card-date">TBD</span>
                             </div>
                         </div>
@@ -404,7 +469,7 @@
                             <img src="images/woodworking-cartography-3.png" alt="Cartography 3">
                             <div class="card-overlay">
                                 <h3 class="card-title">Wyoming</h3>
-                                <p class="card-desc">2' x 2' pine custom made for a client.</p>
+                                <p class="card-desc">2ft x 2ft map of Wyoming with mountains, rivers, and cities</p>
                                 <span class="card-date">July 2018</span>
                             </div>
                         </div>
@@ -415,7 +480,7 @@
                             <img src="images/woodworking-cartography-4.png" alt="Cartography 4">
                             <div class="card-overlay">
                                 <h3 class="card-title">Texas</h3>
-                                <p class="card-desc">2' x 2' pine donated to a fundraiser.</p>
+                                <p class="card-desc">2ft x 2ft map of Texas with interstates and major cities</p>
                                 <span class="card-date">April 2018</span>
                             </div>
                         </div>
@@ -426,7 +491,7 @@
                             <img src="images/woodworking-cartography-5.png" alt="Cartography 5">
                             <div class="card-overlay">
                                 <h3 class="card-title">World Map</h3>
-                                <p class="card-desc">4' x 3' pine added to my collection.</p>
+                                <p class="card-desc">4ft x 3ft mercator projection of the world circa 1748</p>
                                 <span class="card-date">January 2018</span>
                             </div>
                         </div>
@@ -444,7 +509,7 @@
                             <img src="images/woodworking-diy-1.png" alt="DIY 1">
                             <div class="card-overlay">
                                 <h3 class="card-title">DIY Home Office</h3>
-                                <p class="card-desc">13' x 8' built-in for my office.</p>
+                                <p class="card-desc">Custom built-in bookcase with a board and batten wall</p>
                                 <span class="card-date">April 2024</span>
                             </div>
                         </div>
@@ -455,7 +520,7 @@
                             <img src="images/woodworking-diy-2.png" alt="DIY 2">
                             <div class="card-overlay">
                                 <h3 class="card-title">DIY Fireplace</h3>
-                                <p class="card-desc">5' x 10' built-in for my living room.</p>
+                                <p class="card-desc">Custom protruding fireplace with mantle drawer and side cabinet</p>
                                 <span class="card-date">April 2023</span>
                             </div>
                         </div>
@@ -473,7 +538,7 @@
                             <img src="images/woodworking-other-1.png" alt="Other 1">
                             <div class="card-overlay">
                                 <h3 class="card-title">Modular Mini-Golf</h3>
-                                <p class="card-desc">Custom made for a party and then sold.</p>
+                                <p class="card-desc">Custom set of 9 hole modular mini golf course assembled 3 pieces at a time</p>
                                 <span class="card-date">October 2023</span>
                             </div>
                         </div>
@@ -484,7 +549,7 @@
                             <img src="images/woodworking-other-2.png" alt="Other 2">
                             <div class="card-overlay">
                                 <h3 class="card-title">Monogrammed Cutting Board</h3>
-                                <p class="card-desc">18" x 12" cherry & maple custom made for a friend.</p>
+                                <p class="card-desc">Custom edge-grain cutting board with alternating cherry and maple strips</p>
                                 <span class="card-date">April 2022</span>
                             </div>
                         </div>
@@ -618,7 +683,7 @@
                             <img src="images/speaking-conference-1.png" alt="Presentation 1">
                             <div class="card-overlay">
                                 <h3 class="card-title">NWEA Fusion 2026</h3>
-                                <p class="card-desc">Presentation on mathematics Big Ideas and Conceptual Thresholds</p>
+                                <p class="card-desc">Presentation on mathematical Big Ideas and Conceptual Thresholds</p>
                                 <span class="card-date">June 2026</span>
                             </div>
                         </div>
@@ -642,7 +707,7 @@
                             <img src="images/speaking-conference-3.png" alt="Presentation 3">
                             <div class="card-overlay">
                                 <h3 class="card-title">UW Literacy Conference 2014</h3>
-                                <p class="card-desc">Presentation on the importance of vocabulary instruction in math class</p>
+                                <p class="card-desc">Presentation on the importance of vocabulary instruction in math</p>
                                 <span class="card-date">September 2014</span>
                             </div>
                         </div>
