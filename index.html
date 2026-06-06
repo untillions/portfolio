@@ -21,17 +21,15 @@
             --transition-speed: 0.3s;
         }
         
+        * {
+        	box-sizing: border-box; margin: 0; padding: 0;
+        }
+        
 		.icon::before {
 			display: inline-block;
 			text-rendering: auto;
 			-webkit-font-smoothing: antialiased;
 		}
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         
         body {
             background-color: var(--bg-color);
@@ -69,6 +67,13 @@
             width: 100%;
             padding-left: 28px;
             transition: color 0.2s;
+        }
+        
+        .nav-item i {
+			display: block;
+			text-align: center;
+			width: 30px;
+			min-width: 30px;    
         }
         
         .nav-item span {
@@ -115,7 +120,14 @@
         
         p {
             max-width: 600px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .logo-span {
+			max-width: 600px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
         }
         
         a {
@@ -193,9 +205,9 @@
         
         .card-text-link {
 			color: var(--accent-2);
-            font-size: 0.85rem;
+            font-size: 14px;
             text-decoration: none;
-            padding: 0 0.25rem;
+            padding: 0 4px;
             transition: color 0.2s ease;
         }
         
@@ -214,25 +226,28 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 1rem;
+            padding: 16px;
             opacity: 0;
             transition: opacity var(--transition-speed);
         }
         
         .card-title {
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
+            font-size: 17px;
+            margin-bottom: 4px;
+            margin-top: 0px;
         }
         
         .card-desc {
-            font-size: 0.85rem;
+            font-size: 14px;
             font-style: italic;
             color: var(--text-secondary);
             margin-bottom: 4px;
+            margin-top: 0px;
         }
         
         .card-date {
-            font-size: 0.75rem;
+            font-size: 12px;
+            min-height: 12px;
             font-weight: bold;
             color: var(--accent);
         }
@@ -240,8 +255,8 @@
         /* --- Link Button --- */
         .portfolio-btn {
             display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.75rem 1.5rem;
+            margin-top: 24px;
+            padding: 12px 24px;
             background-color: #333;
             color: #fff;
             text-decoration: none;
@@ -270,7 +285,7 @@
                 position: fixed;
                 top: 0;
                 left: 0;
-                padding-top: 1rem;
+                padding-top: 16px;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
@@ -282,14 +297,14 @@
             }
             
             .nav-item {
-                margin: 1rem 0;
+                margin: 16px 0;
                 padding-left: 0;
                 justify-content: center; /* Centers the icon perfectly in the slim bar */
                 border-left: none;
             }
             
             .nav-item i {
-                font-size: 1.2rem; /* Slightly smaller icons for mobile screens */
+                font-size: 19px; /* Slightly smaller icons for mobile screens */
             }
             
             .nav-item span {
@@ -306,7 +321,7 @@
                 margin-left: 60px; /* Matches the new slim sidebar width */
                 margin-bottom: 0;   /* Clears out the old bottom space layout */
                 width: calc(100% - 60px);
-                padding: 2rem 1rem;
+                padding: 32px 16px;
             }
             
             .scroll-item {
@@ -339,20 +354,20 @@
         <!-- Home Page -->
         <div id="home" class="portfolio-view active-view">
             <h1 class="view-title"><i class="fa-solid fa-user"></i>&nbsp;Aaron Kugler</h1>
-            <p>Welcome to my portfolio!<br><br>
-            Click any of the icons on the left bar to view the various sections of my completed works or connect with me using any of the icons below.</p>
-			<span style="display: flex; align-items: center; justify-content: center;">
+            <p>Welcome to my portfolio!</p>
+            <p>Click any of the icons on the left bar to view the various sections of my completed works or connect with me using any of the icons below.</p>
+			<p class="logo-span">
 				<a href="https://www.linkedin.com/in/aaronkugler/" class="card-text-link" target="_blank"><img src="images/linkedin.png" alt="Linked In" style="width: 36px;"></a>&nbsp;&nbsp;
 				<a href="mailto:kugs@live.com" class="card-text-link" target="_blank"><img src="images/email.png" alt="Email" style="width: 36px;"></a>
 				<a href="https://untillions18.wordpress.com" class="card-text-link" target="_blank"><img src="images/untillions2.png" alt="Until Lions" style="width: 36px;"></a>
-        	</span>
+        	</p>
         </div>
         
         <!-- Woodburning Portfolio -->
         <div id="woodburning" class="portfolio-view">
             <h1 class="view-title"><i class="fa-solid fa-fire"></i>&nbsp;Woodburning</h1>
-            <p>Since I discovered it in 2015, woodburning has become my passion. I've spent thousands of hours focused on the precision and painstaking detail that the artistic medium requires. That passion has grown into woodworking projects of several varieties. Any of the projects shown below can be seen in more detail on my woodworking portfolio:<br>
-            <a href="https://untillions18.wordpress.com/" target="_blank"><img src="images/untillions3.png" alt="until lions" style="width: 150px;"></a></p>
+            <p>Since I discovered it in 2015, woodburning has become my passion. I've spent thousands of hours focused on the precision and painstaking detail that the artistic medium requires. That passion has grown into woodworking projects of several varieties. Any of the projects shown below can be seen in more detail on my woodworking portfolio:</p>
+			<p class="logo-span"><a href="https://untillions18.wordpress.com/" target="_blank"><img src="images/untillions3.png" alt="until lions" style="width: 150px;"></a></p>
 
             <section class="gallery-section">
                 <h2>Negative Space</h2>
@@ -894,8 +909,8 @@
 		<!-- Digital Art Portfolio -->
         <div id="digital-art" class="portfolio-view">
             <h1 class="view-title"><i class="fa-solid fa-palette"></i>&nbsp;Digital Art</h1>
-            <p>I've been creating digital art since 2020, exploring several different styles including pixel art and geometric pop art. Any of the projects shown below can be seen in more detail on my digital art portfolio:<br>
-			<a href="https://www.deviantart.com/untillions/gallery/all" target="_blank"><img src="images/deviantart.png" alt="deviant art" style="width: 150px; justify-content: center;"></a></p>
+            <p>I've been creating digital art since 2020, exploring several different styles including pixel art and geometric pop art. Any of the projects shown below can be seen in more detail on my digital art portfolio:</p>
+			<p class="logo-span"><a href="https://www.deviantart.com/untillions/gallery/all" target="_blank"><img src="images/deviantart.png" alt="deviant art" style="width: 150px;"></a></p>
 
             <section class="gallery-section">
                 <h2>Pop Art - Marvel</h2>
@@ -1003,9 +1018,9 @@
                         <div class="media-card">
                             <img src="images/digitalart-pixel-zelda-1.png" alt="Zelda 1">
                             <div class="card-overlay">
-                                <h3 class="card-title">Hylian Shield</h3>
-                                <p class="card-desc">Link's Hylian Shield in Pop Art style</p>
-                                <span class="card-date">August 2021</span>
+                                <h3 class="card-title">Link</h3>
+                                <p class="card-desc">Link from Breath of the Wild in Pixel Art style</p>
+                                <span class="card-date">June 2021</span>
                             </div>
                         </div>
                     </div>
@@ -1014,9 +1029,9 @@
                         <div class="media-card">
                             <img src="images/digitalart-pixel-zelda-2.png" alt="Zelda 2">
                             <div class="card-overlay">
-                                <h3 class="card-title">Daruk</h3>
-                                <p class="card-desc">Daruk the Goron Champion of Hyrule in Pop Art style</p>
-                                <span class="card-date">August 2021</span>
+                                <h3 class="card-title">Ocarina of Time</h3>
+                                <p class="card-desc">Ocarina of Time cover in Pixel Art style</p>
+                                <span class="card-date">July 2021</span>
                             </div>
                         </div>
                     </div>
@@ -1025,9 +1040,9 @@
                         <div class="media-card">
                             <img src="images/digitalart-pixel-zelda-3.png" alt="Zelda 3">
                             <div class="card-overlay">
-                                <h3 class="card-title">Mipha</h3>
-                                <p class="card-desc">Mipha the Zora Champion of Hyrule in Pop Art style</p>
-                                <span class="card-date">August 2021</span>
+                                <h3 class="card-title">Breath of the Wild</h3>
+                                <p class="card-desc">Breath of the Wild cover in Pixel Art style</p>
+                                <span class="card-date">June 2021</span>
                             </div>
                         </div>
                     </div>
@@ -1036,9 +1051,9 @@
                         <div class="media-card">
                             <img src="images/digitalart-pixel-zelda-4.png" alt="Zelda 4">
                             <div class="card-overlay">
-                                <h3 class="card-title">Revali</h3>
-                                <p class="card-desc">Revali the Rito Champion of Hyrule in Pop Art style</p>
-                                <span class="card-date">September 2021</span>
+                                <h3 class="card-title">Link's Awakening</h3>
+                                <p class="card-desc">Link's Awakening cover in Pixel Art style</p>
+                                <span class="card-date">July 2021</span>
                             </div>
                         </div>
                     </div>
@@ -1052,9 +1067,9 @@
                         <div class="media-card">
                             <img src="images/digitalart-untillions-1.png" alt="Until Lions 1">
                             <div class="card-overlay">
-                                <h3 class="card-title">Hylian Shield</h3>
-                                <p class="card-desc">Link's Hylian Shield in Pop Art style</p>
-                                <span class="card-date">August 2021</span>
+                                <h3 class="card-title">Until Lions 1</h3>
+                                <p class="card-desc">Blueprint style formed entirely from ovals</p>
+                                <span class="card-date">June 2022</span>
                             </div>
                         </div>
                     </div>
@@ -1063,9 +1078,9 @@
                         <div class="media-card">
                             <img src="images/digitalart-untillions-2.png" alt="Until Lions 2">
                             <div class="card-overlay">
-                                <h3 class="card-title">Daruk</h3>
-                                <p class="card-desc">Daruk the Goron Champion of Hyrule in Pop Art style</p>
-                                <span class="card-date">August 2021</span>
+                                <h3 class="card-title">Until Lions 2</h3>
+                                <p class="card-desc">Geometric style with sections in colored gradients</p>
+                                <span class="card-date">June 2021</span>
                             </div>
                         </div>
                     </div>
@@ -1074,9 +1089,9 @@
                         <div class="media-card">
                             <img src="images/digitalart-untillions-3.png" alt="Until Lions 3">
                             <div class="card-overlay">
-                                <h3 class="card-title">Mipha</h3>
-                                <p class="card-desc">Mipha the Zora Champion of Hyrule in Pop Art style</p>
-                                <span class="card-date">August 2021</span>
+                                <h3 class="card-title">Until Lions 3</h3>
+                                <p class="card-desc">Graffiti style with neon colors and 3D effect</p>
+                                <span class="card-date">June 2021</span>
                             </div>
                         </div>
                     </div>
@@ -1085,9 +1100,9 @@
                         <div class="media-card">
                             <img src="images/digitalart-untillions-4.png" alt="Until Lions 4">
                             <div class="card-overlay">
-                                <h3 class="card-title">Revali</h3>
-                                <p class="card-desc">Revali the Rito Champion of Hyrule in Pop Art style</p>
-                                <span class="card-date">September 2021</span>
+                                <h3 class="card-title">Until Lions 4</h3>
+                                <p class="card-desc">Aztec inspired with sharper rounded corners</p>
+                                <span class="card-date">June 2021</span>
                             </div>
                         </div>
                     </div>
@@ -1101,9 +1116,9 @@
                         <div class="media-card">
                             <img src="images/digitalart-other-1.png" alt="Other 1">
                             <div class="card-overlay">
-                                <h3 class="card-title">Hylian Shield</h3>
-                                <p class="card-desc">Link's Hylian Shield in Pop Art style</p>
-                                <span class="card-date">August 2021</span>
+                                <h3 class="card-title">MX Force</h3>
+                                <p class="card-desc">"X Force" superheros to resemble scrum team members</p>
+                                <span class="card-date">June 2022</span>
                             </div>
                         </div>
                     </div>
@@ -1112,9 +1127,9 @@
                         <div class="media-card">
                             <img src="images/digitalart-other-2.png" alt="Other 2">
                             <div class="card-overlay">
-                                <h3 class="card-title">Daruk</h3>
-                                <p class="card-desc">Daruk the Goron Champion of Hyrule in Pop Art style</p>
-                                <span class="card-date">August 2021</span>
+                                <h3 class="card-title">Number Ninjas</h3>
+                                <p class="card-desc">Logo for another scrum team at work</p>
+                                <span class="card-date">October 2021</span>
                             </div>
                         </div>
                     </div>
@@ -1123,9 +1138,9 @@
                         <div class="media-card">
                             <img src="images/digitalart-other-3.png" alt="Other 3">
                             <div class="card-overlay">
-                                <h3 class="card-title">Mipha</h3>
-                                <p class="card-desc">Mipha the Zora Champion of Hyrule in Pop Art style</p>
-                                <span class="card-date">August 2021</span>
+                                <h3 class="card-title">Trainer and Swordsman</h3>
+                                <p class="card-desc">My wife and I in the style of our favorite Nintendo games</p>
+                                <span class="card-date">April 2022</span>
                             </div>
                         </div>
                     </div>
