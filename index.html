@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creator Portfolio</title>
     
-    <link rel="apple-touch-icon" href="images/untillions.png">
-	<link rel="icon" type="image/png" href="images/untillions.png">
+    <link rel="apple-touch-icon" href="icons/main-icon.png">
+	<link rel="icon" type="image/png" href="icons/main-icon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
    
@@ -51,6 +51,7 @@
             border-radius: 0 16px 16px 0;
             position: fixed;
             height: calc(100% - 64px);
+            overflow-y: auto;
             z-index: 100;
             transition: width var(--transition-speed);
         }
@@ -98,7 +99,7 @@
         /* --- Main Content --- */
         .content-area {
             margin-left: 80px;
-            padding: 48px 32px;
+            padding: 64px 32px;
             width: calc(100% - 80px);
         }
         
@@ -125,11 +126,25 @@
             margin-bottom: 20px;
         }
         
+        .dark-mode-img {
+        	display: block;
+        }
+        
+        .light-mode-img {
+        	display: none;
+        }
+        
+        .inline-icon {
+			width: 36px;
+			border-radius: 6px;
+        }
+        
         .logo-span {
 			max-width: 600px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			gap: 6px;
         }
         
         a {
@@ -143,6 +158,56 @@
 			color: var(--accent);
 			text-decoration: none;
         }
+        
+        .dark-mode-slider {
+        	display: flex;
+        	justify-content: center;
+        	align-items: center;
+        	margin-top: 64px;
+        	margin-bottom: 8px;
+        	max-width: 600px;
+        	gap: 12px;
+        }
+        
+        .theme-switch {
+			position: relative;
+			display: inline-block;
+			width: 50px;
+			height: 26px;
+        }
+        
+        .theme-switch #theme-toggle {
+			opacity: 0;
+			width: 0;
+			height: 0;
+        }
+        
+        .theme-switch .slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ccc;
+			transition: 0.4s;
+			border-radius: 34px;
+        }
+        
+        .theme-switch .slider-circle {
+			position: absolute;
+			content: '';
+			height: 18px;
+			width: 18px;
+			left: 4px;
+			bottom: 4px;
+			background-color: white;
+			transition: 0.4s;
+			border-radius: 50%;
+        }
+        
+        .theme-switch input:checked + .slider { background-color: #555; }
+		.theme-switch input:checked + .slider .slider-circle { transform: translateX(24px); }
         
         /* --- Scrolling Gallery --- */
         .gallery-section h2 {
@@ -254,77 +319,96 @@
             color: var(--accent);
         }
         
-        /* --- Link Button --- */
-        .portfolio-btn {
-            display: inline-block;
-            margin-top: 24px;
-            padding: 12px 24px;
-            background-color: #333;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
-        
-        .portfolio-btn:hover {
-            background-color: var(--accent);
-        }
-        
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
         
+        /* --- Light Mode Overrides --- */
+        body.light-mode {
+			--bg-color: #ffffff;
+            --nav-bg: #EBEBEB;
+            --text-primary: #000000;
+            --text-secondary: #555555;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+        }
+        
+        body.light-mode .gallery-section h2,
+        body.light-mode .nav-item {
+			color: var(--text-secondary);
+        }
+        
+        body.light-mode .nav-item:hover, .nav-item.active {
+            color: var(--text-primary);
+        }
+        
+        body.light-mode .side-nav {
+            background-color: var(--nav-bg);
+        }
+        
+        body.light-mode .card-overlay {
+			background: rgba(255, 255, 255, 0.8);
+        }
+        
+        body.light-mode .dark-mode-img {
+        	display: none;
+        }
+        
+        body.light-mode .light-mode-img {
+        	display: block;
+        }
+        
         /* --- Mobile Optimization --- */
         @media (max-width: 768px) {
             body {
-                flex-direction: row; /* Keeps nav and content side-by-side */
+                flex-direction: row;
             }
             
             .side-nav {
-                width: 60px; /* Slimmer profile for small screens */
-                height: 100vh;
-                position: fixed;
-                top: 0;
-                left: 0;
-                padding-top: 16px;
-                display: flex;
-                flex-direction: column;
+                width: 60px;
                 justify-content: flex-start;
-                overflow-y: auto;
+                margin-top: 24px;
+                padding-top: 8px;
+                height: calc(100% - 48px);
             }
             
             .side-nav:hover {
-                width: 60px; /* Disables the hover expansion feature on mobile touch devices */
+                width: 60px;
             }
             
             .nav-item {
                 margin: 16px 0;
                 padding-left: 0;
-                justify-content: center; /* Centers the icon perfectly in the slim bar */
+                justify-content: center;
                 border-left: none;
             }
             
             .nav-item i {
-                font-size: 19px; /* Slightly smaller icons for mobile screens */
+                font-size: 19px;
             }
             
             .nav-item span {
-                display: none; /* Explicitly hides text labels on mobile */
+                display: none;
             }
             
             .nav-item:hover, .nav-item.active {
                 border-left: none;
-                color: var(--accent); /* Uses purely color change to show active state */
+                color: var(--accent);
             }
             
             /* --- Main Content Adjustments --- */
             .content-area {
-                margin-left: 60px; /* Matches the new slim sidebar width */
-                margin-bottom: 0;   /* Clears out the old bottom space layout */
+                margin-left: 60px;
+                margin-bottom: 0;
                 width: calc(100% - 60px);
-                padding: 32px 16px;
+                padding: 44px 16px;
             }
+            
+            .view-title {
+				margin-bottom: 24px;
+				font-size: 24px;
+			}
             
             .scroll-item {
                 width: 240px;
@@ -360,17 +444,29 @@
             <p style="text-align: center;">Welcome to my portfolio!</p>
             <p>Click any of the icons on the left bar to view various sections of my completed works or connect with me using any of the icons below.</p>
 			<p class="logo-span">
-				<a href="https://www.linkedin.com/in/aaronkugler/" class="card-text-link" target="_blank"><img src="images/linkedin.png" alt="Linked In" style="width: 36px;"></a>&nbsp;&nbsp;
-				<a href="mailto:kugs@live.com" class="card-text-link" target="_blank"><img src="images/email.png" alt="Email" style="width: 36px;"></a>
-				<a href="https://untillions18.wordpress.com" class="card-text-link" target="_blank"><img src="images/untillions2.png" alt="Until Lions" style="width: 36px;"></a>
+				<a href="https://www.linkedin.com/in/aaronkugler/" target="_blank"><img src="icons/linkedin-icon.png" class="inline-icon" alt="Linked In"></a>
+				<a href="https://www.deviantart.com/untillions/gallery/all" target="_blank"><img src="icons/deviant-icon.png" class="inline-icon" alt="Deviant Art"></a>
+				<a href="https://github.com/untillions" target="_blank"><img src="icons/github-icon.png" class="inline-icon dark-mode-img" alt="Github"><img src="icons/github-icon2.png" class="inline-icon light-mode-img" alt="Github"></a>
+				<a href="mailto:kugs@live.com" target="_blank"><img src="icons/email-icon.png" class="inline-icon dark-mode-img" alt="Email"><img src="icons/email-icon2.png" class="inline-icon light-mode-img" alt="Email"></a>
+				<a href="https://untillions18.wordpress.com" target="_blank"><img src="icons/untillions-icon.png" class="inline-icon dark-mode-img" alt="Untillions"><img src="icons/untillions-icon2.png" class="inline-icon light-mode-img" alt="Untillions"></a>
         	</p>
+        	<div class="dark-mode-slider">
+				<span style="font-size: 14px; font-weight: bold;">Light<br>Mode</span>☀️
+				<label class="theme-switch">
+					<input type="checkbox" id="theme-toggle">
+					<span class="slider">
+						<span class="slider-circle"></span>
+					</span>
+				</label>
+				🌙<span style="font-size: 14px; font-weight: bold;">Dark<br>Mode</span>
+			</div>
         </div>
         
         <!-- Woodburning Portfolio -->
         <div id="woodburning" class="portfolio-view">
             <h1 class="view-title"><i class="fa-solid fa-fire"></i>&nbsp;Woodburning</h1>
             <p>Since I discovered it in 2015, woodburning has become my passion. That passion has grown into woodworking projects of several varieties. Any of the projects shown below can be seen in more detail on my woodworking portfolio:</p>
-			<p class="logo-span"><a href="https://untillions18.wordpress.com/" target="_blank"><img src="images/untillions3.png" alt="until lions" style="width: 150px;"></a></p>
+			<p class="logo-span"><a href="https://untillions18.wordpress.com/" target="_blank"><img class="dark-mode-img" src="icons/woodworking.png" alt="until lions" style="width: 150px;"><img class="light-mode-img" src="icons/woodworking2.png" alt="until lions" style="width: 150px;"></a></p>
 
             <section class="gallery-section">
                 <h2>Negative Space</h2>
@@ -696,7 +792,7 @@
         
         <!-- Speaking Portfolio -->
         <div id="speaking" class="portfolio-view">
-            <h1 class="view-title"><i class="fa-solid fa-microphone"></i>&nbsp;&nbsp;Speaking</h1>
+            <h1 class="view-title"><i class="fa-solid fa-microphone"></i>&nbsp;Speaking</h1>
             <p>I've had the opportunity to speak at several education conferences. Additionally, I've filmed several interviews and videos about educational theory and classroom best practice.</p>
 
             <section class="gallery-section">
@@ -804,7 +900,7 @@
         <div id="curriculum" class="portfolio-view">
             <h1 class="view-title"><i class="fa-solid fa-graduation-cap"></i>&nbsp;Curriculum</h1>
             <p>Since I started creating curriculum in 2013, I have been uploading my best projects and most engaging lessons to Teachers Pay Teachers. Any of the products shown below can be seen in more detail on my curriculum portfolio:</p>
-			<p class="logo-span"><a href="https://www.teacherspayteachers.com/store/mr-kugies-curriculum" target="_blank"><img src="images/mr-kugies-curriculum.png" alt="mr kugie" style="width: 85px;"></a></p>
+			<p class="logo-span"><a href="https://www.teacherspayteachers.com/store/mr-kugies-curriculum" target="_blank"><img src="icons/mr-kugies-curriculum.png" alt="mr kugie" style="width: 85px;"></a></p>
 
             <section class="gallery-section">
                 <h2>Math Explorations</h2>
@@ -1232,7 +1328,7 @@
         <div id="digital-art" class="portfolio-view">
             <h1 class="view-title"><i class="fa-solid fa-palette"></i>&nbsp;Digital Art</h1>
             <p>I've been creating digital art since 2020, exploring several different styles including pixel art and geometric pop art. Any of the projects shown below can be seen in more detail on my digital art portfolio:</p>
-			<p class="logo-span"><a href="https://www.deviantart.com/untillions/gallery/all" target="_blank"><img src="images/deviantart.png" alt="deviant art" style="width: 150px;"></a></p>
+			<p class="logo-span"><a href="https://www.deviantart.com/untillions/gallery/all" target="_blank"><img class="dark-mode-img" src="icons/deviantart.png" alt="deviant art" style="width: 150px;"><img class="light-mode-img" src="icons/deviantart2.png" alt="deviant art" style="width: 150px;"></a></p>
 
             <section class="gallery-section">
                 <h2>Pop Art - Marvel</h2>
@@ -1476,81 +1572,19 @@
         <div id="drawing" class="portfolio-view">
             <h1 class="view-title"><i class="fa-solid fa-pencil"></i>&nbsp;Drawing</h1>
             <p>.</p>
-
-            <section class="gallery-section">
-                <h2>Category 1</h2>
-                <div class="horizontal-scroll">
-              
-                    <div class="scroll-item">
-                        <div class="media-card">
-                            <img src="images/puzzles-set-1.png" alt="Catan">
-                            <div class="card-overlay">
-                                <h3 class="card-title">Settlers of Catan</h3>
-                                <p class="card-desc">Set of 7 puzzles plus a meta puzzle themed for this popular board game's 30th anniversary</p>
-                                <span class="card-date">November 2025</span>
-                            </div>
-                        </div>
-                        <a href="https://puzzledpint.org/events/november-2025/" class="card-text-link" target="_blank">Link to the Set</a>
-                    </div>
-
-                    <div class="scroll-item">
-                        <div class="media-card">
-                            <img src="images/puzzles-set-2.png" alt="Phantom Tollbooth">
-                            <div class="card-overlay">
-                                <h3 class="card-title">Phantom Tollbooth</h3>
-                                <p class="card-desc">Set of 6 puzzles plus a meta puzzle themed for this beloved children's book</p>
-                                <span class="card-date">August 2024</span>
-                            </div>
-                        </div>
-						<a href="https://puzzledpint.org/events/august-2024/" class="card-text-link" target="_blank">Link to the Set</a>
-                    </div>
-              
-                </div>
-            </section>
         </div>
         
         <!-- Painting Portfolio -->
         <div id="painting" class="portfolio-view">
             <h1 class="view-title"><i class="fa-solid fa-paint-brush"></i>&nbsp;Painting</h1>
             <p>.</p>
-
-            <section class="gallery-section">
-                <h2>Category 1</h2>
-                <div class="horizontal-scroll">
-              
-                    <div class="scroll-item">
-                        <div class="media-card">
-                            <img src="images/puzzles-set-1.png" alt="Catan">
-                            <div class="card-overlay">
-                                <h3 class="card-title">Settlers of Catan</h3>
-                                <p class="card-desc">Set of 7 puzzles plus a meta puzzle themed for this popular board game's 30th anniversary</p>
-                                <span class="card-date">November 2025</span>
-                            </div>
-                        </div>
-                        <a href="https://puzzledpint.org/events/november-2025/" class="card-text-link" target="_blank">Link to the Set</a>
-                    </div>
-
-                    <div class="scroll-item">
-                        <div class="media-card">
-                            <img src="images/puzzles-set-2.png" alt="Phantom Tollbooth">
-                            <div class="card-overlay">
-                                <h3 class="card-title">Phantom Tollbooth</h3>
-                                <p class="card-desc">Set of 6 puzzles plus a meta puzzle themed for this beloved children's book</p>
-                                <span class="card-date">August 2024</span>
-                            </div>
-                        </div>
-						<a href="https://puzzledpint.org/events/august-2024/" class="card-text-link" target="_blank">Link to the Set</a>
-                    </div>
-              
-                </div>
-            </section>
         </div>
         
         <!-- Coding Portfolio -->
         <div id="coding" class="portfolio-view">
             <h1 class="view-title"><i class="fa-solid fa-code"></i>&nbsp;Coding</h1>
             <p>I've been coding projects since 2007, back when Visual Basic was the first language I learned. Since then, I've tackled personal and professional projects in python, C+, java, and HTML/CSS. Any of the projects shown below can be seen in more detail on my github portfolio:</p>
-			<p class="logo-span"><a href="https://github.com/untillions" target="_blank"><img src="images/github.png" alt="until lions" style="width: 150px;"></a></p>
+			<p class="logo-span"><a href="https://github.com/untillions" target="_blank"><img class="dark-mode-img" src="icons/github.png" alt="until lions" style="width: 150px;"><img class="light-mode-img" src="icons/github2.png" alt="until lions" style="width: 150px;"></a></p>
 
             <section class="gallery-section">
                 <h2>HTML Projects</h2>
@@ -1608,56 +1642,75 @@
         
     </main>
 
-    <script>
+    <script>	
+        
         document.addEventListener('DOMContentLoaded', () => {
-		const navItems = document.querySelectorAll('.nav-item');
-		const views = document.querySelectorAll('.portfolio-view');
-		const mediaCards = document.querySelectorAll('.media-card');
-		
-		// Portfolio Tab Switching Logic
-		navItems.forEach(item => {
-			item.addEventListener('click', (e) => {
-				e.preventDefault();
+			const themeToggle = document.getElementById('theme-toggle');
+			const navItems = document.querySelectorAll('.nav-item');
+			const views = document.querySelectorAll('.portfolio-view');
+			const mediaCards = document.querySelectorAll('.media-card');
 			
-				navItems.forEach(nav => nav.classList.remove('active'));
-				views.forEach(view => view.classList.remove('active-view'));
-				
-				item.classList.add('active');
-				
-				const targetId = item.getAttribute('data-target');
-				const targetView = document.getElementById(targetId);
-				if (targetView) {
-					targetView.classList.add('active-view');
-				}
-				
-				// Clean up any open mobile overlays when switching tabs
-				mediaCards.forEach(c => c.classList.remove('show-overlay'));
-			});
-		});
-	
-		// Mobile Tap-to-Reveal Overlay Logic
-		mediaCards.forEach(card => {
-			card.addEventListener('click', (e) => {
-				if (window.innerWidth <= 768) {
-					e.stopPropagation();
-					
-					const isOpen = card.classList.contains('show-overlay');
-					mediaCards.forEach(c => c.classList.remove('show-overlay'));
-					
-					if (!isOpen) {
-						card.classList.add('show-overlay');
-					}
-				}
-			});
-		});
-	
-		// Dismiss Overlay When Tapping Anywhere Else
-		document.addEventListener('click', () => {
-			if (window.innerWidth <= 768) {
-				mediaCards.forEach(c => c.classList.remove('show-overlay'));
+			// Check whether device is in dark or light mode
+			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				themeToggle.checked = true;
+			} else {
+				document.body.classList.add('light-mode');
+				themeToggle.checked = false;
 			}
+			
+			// Dark Mode Toggle
+			themeToggle.addEventListener('change', (e) => {
+				if (e.target.checked) {
+					document.body.classList.remove('light-mode');
+				} else {
+					document.body.classList.add('light-mode');
+				}
+			});
+			
+			// Portfolio Tab Switching Logic
+			navItems.forEach(item => {
+				item.addEventListener('click', (e) => {
+					e.preventDefault();
+				
+					navItems.forEach(nav => nav.classList.remove('active'));
+					views.forEach(view => view.classList.remove('active-view'));
+					
+					item.classList.add('active');
+					
+					const targetId = item.getAttribute('data-target');
+					const targetView = document.getElementById(targetId);
+					if (targetView) {
+						targetView.classList.add('active-view');
+					}
+					
+					// Clean up any open mobile overlays when switching tabs
+					mediaCards.forEach(c => c.classList.remove('show-overlay'));
+				});
+			});
+		
+			// Mobile Tap-to-Reveal Overlay Logic
+			mediaCards.forEach(card => {
+				card.addEventListener('click', (e) => {
+					if (window.innerWidth <= 768) {
+						e.stopPropagation();
+						
+						const isOpen = card.classList.contains('show-overlay');
+						mediaCards.forEach(c => c.classList.remove('show-overlay'));
+						
+						if (!isOpen) {
+							card.classList.add('show-overlay');
+						}
+					}
+				});
+			});
+		
+			// Dismiss Overlay When Tapping Anywhere Else
+			document.addEventListener('click', () => {
+				if (window.innerWidth <= 768) {
+					mediaCards.forEach(c => c.classList.remove('show-overlay'));
+				}
+			});
 		});
-	});
 	
     </script>
 </body>
