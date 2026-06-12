@@ -52,9 +52,15 @@
             position: fixed;
             height: calc(100% - 64px);
             overflow-y: auto;
+            -ms-overflow-style: none;  /* IE and Edge */
+			scrollbar-width: none;  /* Firefox */
             z-index: 100;
             transition: width var(--transition-speed);
         }
+        
+        .side-nav::-webkit-scrollbar {
+			display: none; /* Chrome, Safari and Opera */
+		}
         
         .side-nav:hover {
             width: 200px;
@@ -1354,18 +1360,42 @@
                                 <span class="card-date">July 2025</span>
                             </div>
                         </div>
-						<a href="https://www.bonfire.com/puzzled-pint-15th-anniversary-shirt/" class="card-text-link" target="_blank">Link to the Shirt</a>                        
+						<a href="https://www.bonfire.com/puzzled-pint-15th-anniversary-shirt/" class="card-text-link" target="_blank">Link to the Shirt</a>
                     </div>
                     
                     <div class="scroll-item">
                         <div class="media-card">
-                            <img src="images/puzzles-other-3.png" alt="Escape Room">
+                            <img src="images/puzzles-other-2.png" alt="Escape Room">
                             <div class="card-overlay">
                                 <h3 class="card-title">Escape Room</h3>
                                 <p class="card-desc">Fully designed thematic escape room for a family event in my sister-in-law's house</p>
                                 <span class="card-date">July 2020</span>
                             </div>
                         </div>
+                    </div>
+                    
+					<div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/puzzles-other-3.png" alt="Puzzled Pint">
+                            <div class="card-overlay">
+                                <h3 class="card-title">What is Puzzled Pint?</h3>
+                                <p class="card-desc">Sampling of simple puzzles to introduce new puzzlers to Puzzled Pint's style and format</p>
+                                <span class="card-date">August 2025</span>
+                            </div>
+                        </div>
+						<a href="https://puzzledpint.org/wp-content/uploads/2025/08/WhatIsPuzzledPint.pdf" class="card-text-link" target="_blank">Link to the Puzzle</a>
+                    </div>
+                    
+					<div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/puzzles-other-4.png" alt="Patreon Puzzle">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Patreon Puzzle</h3>
+                                <p class="card-desc">Designed Zodiac sign bonus puzzle for another author's constellation puzzle set</p>
+                                <span class="card-date">October 2025</span>
+                            </div>
+                        </div>
+						<a href="https://www.patreon.com/PuzzledPint/posts/octobers-patreon-141333306" class="card-text-link" target="_blank">Link to the Puzzle</a>
                     </div>
               
                 </div>
@@ -1804,7 +1834,7 @@
         <!-- Coding Portfolio -->
         <div id="coding" class="portfolio-view">
             <h1 class="view-title"><i class="fa-solid fa-code"></i>&nbsp;Coding</h1>
-            <p>I've been coding projects since 2007, back when Visual Basic was the first language I learned. Since then, I've tackled personal and professional projects in python, C+, java, and HTML/CSS. Any of the projects shown below can be seen in more detail on my github portfolio:</p>
+            <p>I've been coding projects since 2007, back when Visual Basic was the first language I learned. Since then, I've tackled personal and professional projects in python, C+, java, and HTML/CSS. Some of the projects shown below can be seen in more detail on my github portfolio:</p>
 			<p class="logo-span"><a href="https://github.com/untillions" target="_blank"><img class="dark-mode-img" src="icons/github.png" alt="until lions" style="width: 150px;"><img class="light-mode-img" src="icons/github2.png" alt="until lions" style="width: 150px;"></a></p>
 
             <section class="gallery-section">
@@ -1845,18 +1875,34 @@
                         </div>
 						<a href="https://untillions.github.io/pokedex" class="card-text-link" target="_blank">Link to the Site</a>
                     </div>
-                    
+              
+                </div>
+                
+                <h2>Visual Basic Projects</h2>
+                <div class="horizontal-scroll">
+              
                     <div class="scroll-item">
                         <div class="media-card">
-                            <img src="images/coding-html-4.png" alt="HTML 4">
+                            <img src="images/coding-game-1.png" alt="Game 1">
                             <div class="card-overlay">
-                                <h3 class="card-title">Texas to Common Core Mapper</h3>
-                                <p class="card-desc">Tool designed for coworkers to examine connections between math standard sets</p>
-                                <span class="card-date">May 2026</span>
+                                <h3 class="card-title">Cat & Mouse</h3>
+                                <p class="card-desc">Game designed for high school capstone project with 3 levels of difficulty/game speed</p>
+                                <span class="card-date">May 2009</span>
                             </div>
                         </div>
                     </div>
-              
+
+                    <div class="scroll-item">
+                        <div class="media-card">
+                            <img src="images/coding-game-2.png" alt="Game 2">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Pacman x Zelda</h3>
+                                <p class="card-desc">Pacman game designed with ability to switch to Zelda, Sonic, and Mario themes</p>
+                                <span class="card-date">December 2009</span>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </section>
         </div>
