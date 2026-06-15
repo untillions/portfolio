@@ -19,6 +19,15 @@
             --accent: #e50914;
             --accent-2: #0982e5;
             --transition-speed: 0.3s;
+			--color-fire: #ff7300;
+			--color-book: #00a8ff;
+			--color-microphone: #9c88ff;
+			--color-graduation-cap: #fbc531;
+			--color-puzzle-piece: #4cd137;
+			--color-video: #e84118; 
+			--color-palette: #e84393;
+			--color-code: #00cec9; 
+
         }
         
         * {
@@ -69,8 +78,8 @@
         .nav-item {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 24px;
-            margin: 24px 0;
+            font-size: 22px;
+            margin: 22px 0;
             display: flex;
             align-items: center;
             width: 100%;
@@ -82,7 +91,7 @@
 			display: block;
 			text-align: center;
 			width: 30px;
-			min-width: 30px;    
+			min-width: 30px;
         }
         
         .nav-item span {
@@ -105,7 +114,7 @@
         /* --- Main Content --- */
         .content-area {
             margin-left: 80px;
-            padding: 64px 32px;
+            padding: 60px 32px;
             width: calc(100% - 80px);
         }
         
@@ -345,25 +354,108 @@
 			color: var(--text-secondary);
         }
         
-        body.light-mode .nav-item:hover, .nav-item.active {
-            color: var(--text-primary);
-        }
+        body.light-mode .nav-item:hover, .nav-item.active { color: var(--text-primary); }
+        body.light-mode .side-nav { background-color: var(--nav-bg); }
+        body.light-mode .card-overlay { background: rgba(255, 255, 255, 0.8); }
+        body.light-mode .dark-mode-img {display: none; }
+        body.light-mode .light-mode-img { display: block; }
         
-        body.light-mode .side-nav {
-            background-color: var(--nav-bg);
-        }
-        
-        body.light-mode .card-overlay {
-			background: rgba(255, 255, 255, 0.8);
-        }
-        
-        body.light-mode .dark-mode-img {
-        	display: none;
-        }
-        
-        body.light-mode .light-mode-img {
-        	display: block;
-        }
+        /* --- Timeline Layout --- */
+		.timeline-wrapper {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			max-width: 800px;
+			margin-top: 32px;
+		}
+		
+		.timeline-row {
+			display: flex;
+			align-items: stretch; 
+			margin-bottom: 0;
+		}
+		
+		.timeline-swimlanes {
+			flex: 1;
+			display: grid;
+			grid-template-columns: repeat(5, 54px);
+			align-items: center; 
+			justify-content: start;
+			gap: 12px;
+			padding-left: 24px;
+		}
+		
+		.timeline-item {
+			border-radius: 6px;
+			height: 90px;
+			margin: 3px 0;
+			width: 100%; 
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 16px;
+			background-color: color-mix(in srgb, var(--item-color) 20%, transparent);
+			border: 2px solid var(--item-color);
+			transition: transform var(--transition-speed);
+		}
+		
+		.timeline-axis {
+			width: 70px; 
+			text-align: right;
+			border-right: 2px solid var(--text-secondary);
+			padding-right: 12px;
+			color: var(--text-secondary);
+			font-weight: bold;
+			font-size: 14px;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			justify-content: center; 
+		}
+		
+		.timeline-axis::before {
+			content: '';
+			position: absolute;
+			right: -9px; 
+			bottom: 0; 
+			width: 16px;
+			height: 2px;
+			background-color: var(--text-secondary);
+			border: none;
+			border-radius: 0;
+		}
+		
+		.timeline-row:last-child .timeline-axis::before {
+			display: none;
+		}
+		
+		.timeline-row:first-child .timeline-axis::after {
+			content: '';
+			position: absolute;
+			top: 0; 
+			right: -9px; 
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			border-bottom: 11px solid var(--text-secondary);
+		}
+		
+		.timeline-row:last-child .timeline-axis::after {
+			content: '';
+			position: absolute;
+			bottom: 0; 
+			right: -9px;
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			border-top: 11px solid var(--text-secondary);
+		}
+		
+		.timeline-item:hover {
+			transform: scale(1.05);
+		}
+		
+		.timeline-item i {
+			color: var(--item-color);
+		}
         
         /* --- Mobile Optimization --- */
         @media (max-width: 768px) {
@@ -423,6 +515,17 @@
             .media-card {
                 height: 136px;
             }
+            
+            .timeline-swimlanes {
+				grid-template-columns: repeat(5, 40px);
+				gap: 6px;
+				padding-left: 12px;
+			}
+			.timeline-axis {
+				width: 55px;
+				font-size: 12px;
+				padding-right: 8px;
+			}
         }
     </style>
 </head>
@@ -430,6 +533,7 @@
 
     <nav class="side-nav">
         <a href="#" class="nav-item active" data-target="home"><i class="fa-solid fa-home"></i><span>Home</span></a>
+        <a href="#" class="nav-item" data-target="timeline"><i class="fa-solid fa-timeline"></i><span>Timeline</span></a>
 		<a href="#" class="nav-item" data-target="woodburning"><i class="fa-solid fa-fire"></i><span>Woodburning</span></a>
         <a href="#" class="nav-item" data-target="writing"><i class="fa-solid fa-book"></i><span>Writing</span></a>
         <a href="#" class="nav-item" data-target="speaking"><i class="fa-solid fa-microphone"></i><span>Speaking</span></a>
@@ -437,8 +541,6 @@
         <a href="#" class="nav-item" data-target="puzzles"><i class="fa-solid fa-puzzle-piece"></i><span>Puzzles</span></a>
 		<a href="#" class="nav-item" data-target="video"><i class="fa-solid fa-video"></i><span>Video</span></a>
         <a href="#" class="nav-item" data-target="digital-art"><i class="fa-solid fa-palette"></i><span>Digital Art</span></a>
-        <a href="#" class="nav-item" data-target="drawing"><i class="fa-solid fa-pencil"></i><span>Drawing</span></a>
-        <a href="#" class="nav-item" data-target="painting"><i class="fa-solid fa-paint-brush"></i><span>Painting</span></a>
         <a href="#" class="nav-item" data-target="coding"><i class="fa-solid fa-code"></i><span>Coding</span></a>
     </nav>
 
@@ -468,6 +570,14 @@
 				🌙<span style="font-size: 14px; font-weight: bold;">Dark<br>Mode</span>
 			</div>
         </div>
+        
+        <!-- Timeline Page -->
+        <div id="timeline" class="portfolio-view">
+			<h1 class="view-title"><i class="fa-solid fa-timeline"></i>&nbsp;Timeline</h1>
+			<p>A chronological view of my creative focuses over the years. For more details, click the corresponding icon on the navigation bar to the left.</p>
+			
+			<div id="timeline-container" class="timeline-wrapper"></div>
+		</div>
         
         <!-- Woodburning Portfolio -->
         <div id="woodburning" class="portfolio-view">
@@ -1201,7 +1311,7 @@
                             <div class="card-overlay">
                                 <h3 class="card-title">Google Suite Challenges</h3>
                                 <p class="card-desc">Set of challenges in Docs, Sheets, Slides, and Forms to teach students how to use the suite</p>
-                                <span class="card-date">August 2022</span>
+                                <span class="card-date">May 2021</span>
                             </div>
                         </div>
                     </div>
@@ -1212,7 +1322,7 @@
                             <div class="card-overlay">
                                 <h3 class="card-title">Google Sheets Coding Challenges</h3>
                                 <p class="card-desc">Set of tasks for students to learn spreadsheet formulas and coding logic</p>
-                                <span class="card-date">August 2022</span>
+                                <span class="card-date">May 2021</span>
                             </div>
                         </div>
                     </div>
@@ -1977,6 +2087,102 @@
 					mediaCards.forEach(c => c.classList.remove('show-overlay'));
 				}
 			});
+			
+			// Timeline
+			const timelineData = {
+				'Q1 2013': ['graduation-cap'],
+				'Q2 2013': ['graduation-cap'],
+				'Q3 2013': ['graduation-cap'],
+				'Q4 2013': ['graduation-cap'],
+				'Q1 2014': ['graduation-cap'],
+				'Q2 2014': ['graduation-cap'],
+				'Q3 2014': ['microphone', 'graduation-cap'],
+				'Q4 2014': ['graduation-cap'],
+				'Q1 2015': ['graduation-cap'],
+				'Q2 2015': ['fire', 'graduation-cap'],
+				'Q3 2015': ['fire', 'graduation-cap'],
+				'Q4 2015': ['fire', 'graduation-cap'],
+				'Q1 2016': ['fire', 'graduation-cap'],
+				'Q2 2016': ['graduation-cap'],
+				'Q3 2016': ['graduation-cap'],
+				'Q4 2016': ['graduation-cap'],
+				'Q1 2017': ['fire', 'graduation-cap'],
+				'Q2 2017': ['fire', 'graduation-cap'],
+				'Q3 2017': ['fire', 'book', 'graduation-cap'],
+				'Q4 2017': ['fire', 'book', 'graduation-cap'],
+				'Q1 2018': ['fire', 'book', 'graduation-cap'],
+				'Q2 2018': ['fire', 'book', 'graduation-cap', 'puzzle-piece'],
+				'Q3 2018': ['fire', 'book', 'graduation-cap', 'puzzle-piece'],
+				'Q4 2018': ['fire', 'book', 'graduation-cap'],
+				'Q1 2019': ['fire', 'microphone', 'graduation-cap', 'video'],
+				'Q2 2019': ['fire', 'graduation-cap'],
+				'Q3 2019': ['fire', 'book', 'graduation-cap'],
+				'Q4 2019': ['fire', 'book', 'graduation-cap'],
+				'Q1 2020': ['book', 'graduation-cap'],
+				'Q2 2020': ['fire', 'book', 'graduation-cap', 'puzzle-piece'],
+				'Q3 2020': ['fire', 'book', 'graduation-cap', 'puzzle-piece', 'video'],
+				'Q4 2020': ['book', 'graduation-cap'],
+				'Q1 2021': ['fire', 'book', 'graduation-cap'],
+				'Q2 2021': ['fire', 'graduation-cap', 'palette'],
+				'Q3 2021': ['fire', 'book', 'palette'],
+				'Q4 2021': ['fire', 'palette'],
+				'Q1 2022': ['fire', 'palette'],
+				'Q2 2022': ['video', 'palette'],
+				'Q3 2022': ['book', 'puzzle-piece'],
+				'Q4 2022': ['puzzle-piece'],
+				'Q1 2023': ['fire', 'book', 'puzzle-piece'],
+				'Q2 2023': ['fire', 'puzzle-piece'],
+				'Q3 2023': ['fire', 'puzzle-piece'],
+				'Q4 2023': ['fire'],
+				'Q1 2024': ['puzzle-piece'],
+				'Q2 2024': ['fire', 'puzzle-piece', 'video'],
+				'Q3 2024': ['fire', 'puzzle-piece'],
+				'Q4 2024': ['puzzle-piece'],
+				'Q1 2025': ['book', 'puzzle-piece'],
+				'Q2 2025': ['book', 'microphone', 'puzzle-piece', 'video'],
+				'Q3 2025': ['book', 'microphone', 'puzzle-piece'],
+				'Q4 2025': ['fire', 'book', 'puzzle-piece'],
+				'Q1 2026': ['fire', 'book', 'puzzle-piece', 'code'],
+				'Q2 2026': ['fire', 'book', 'microphone', 'code']
+			};
+			
+			const timelineContainer = document.getElementById('timeline-container');
+			
+			if (timelineContainer) {
+				const quarters = Object.keys(timelineData).reverse();
+				
+				quarters.forEach(q => {
+					const row = document.createElement('div');
+					row.className = 'timeline-row';
+					
+					const swimlanes = document.createElement('div');
+					swimlanes.className = 'timeline-swimlanes';
+					
+					const icons = timelineData[q];
+        
+					for (let i = 0; i < 5; i++) {
+						const lane = document.createElement('div');
+						
+						if (icons[i]) {
+							const iconName = icons[i];
+							lane.className = 'timeline-item';
+							lane.style.setProperty('--item-color', `var(--color-${iconName})`);
+							lane.innerHTML = `<i class="fa-solid fa-${iconName}"></i>`;
+						}
+						swimlanes.appendChild(lane);
+					}
+					
+					const axis = document.createElement('div');
+					axis.className = 'timeline-axis';
+					
+					const [quarter, year] = q.split(' ');
+					axis.innerHTML = `${quarter}<br>${year}`;
+					
+					row.appendChild(axis);
+					row.appendChild(swimlanes);
+					timelineContainer.appendChild(row);
+				});
+			}
 		});
 	
     </script>
